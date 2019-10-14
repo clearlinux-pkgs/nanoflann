@@ -4,7 +4,7 @@
 #
 Name     : nanoflann
 Version  : 1.3.1
-Release  : 1
+Release  : 2
 URL      : https://github.com/jlblancoc/nanoflann/archive/v1.3.1/nanoflann-1.3.1.tar.gz
 Source0  : https://github.com/jlblancoc/nanoflann/archive/v1.3.1/nanoflann-1.3.1.tar.gz
 Summary  : nanoflann - A C++11 header-only library for kd-trees
@@ -27,6 +27,14 @@ Requires: nanoflann = %{version}-%{release}
 dev components for the nanoflann package.
 
 
+%package extras
+Summary: extras components for the nanoflann package.
+Group: Default
+
+%description extras
+extras components for the nanoflann package.
+
+
 %package license
 Summary: license components for the nanoflann package.
 Group: Default
@@ -43,7 +51,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571087664
+export SOURCE_DATE_EPOCH=1571087816
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -66,7 +74,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 cd clr-build; make test
 
 %install
-export SOURCE_DATE_EPOCH=1571087664
+export SOURCE_DATE_EPOCH=1571087816
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/nanoflann
 cp %{_builddir}/nanoflann-1.3.1/COPYING %{buildroot}/usr/share/package-licenses/nanoflann/525a4173096d5a839c3d609ae433ba90f2275dea
@@ -77,6 +85,17 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/nanoflann.hpp
+/usr/lib64/cmake/nanoflann/nanoflannConfig.cmake
+/usr/lib64/cmake/nanoflann/nanoflannConfigVersion.cmake
+/usr/lib64/cmake/nanoflann/nanoflannTargets.cmake
+/usr/lib64/pkgconfig/nanoflann.pc
+
+%files extras
+%defattr(-,root,root,-)
 /usr/examples/SO2_adaptor_example
 /usr/examples/SO3_adaptor_example
 /usr/examples/dynamic_pointcloud_example
@@ -86,14 +105,6 @@ popd
 /usr/examples/pointcloud_kdd_radius
 /usr/examples/saveload_example
 /usr/examples/vector_of_vectors_example
-
-%files dev
-%defattr(-,root,root,-)
-/usr/include/nanoflann.hpp
-/usr/lib64/cmake/nanoflann/nanoflannConfig.cmake
-/usr/lib64/cmake/nanoflann/nanoflannConfigVersion.cmake
-/usr/lib64/cmake/nanoflann/nanoflannTargets.cmake
-/usr/lib64/pkgconfig/nanoflann.pc
 
 %files license
 %defattr(0644,root,root,0755)
